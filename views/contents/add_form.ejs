@@ -1,0 +1,22 @@
+<div class="container">
+    <form action="/add" method="POST">
+        <div class="mb-3">
+            <label for="CreatedDate" class="form-label">Date</label>
+            <input type="text" class="form-control" id="CreatedDate" name="CreatedDate" placeholder="YYYY-MM-DD">
+        </div>
+        <div class="mb-3">
+            <label for="LogNo" class="form-label">Log Number</label>
+            <input type="text" class="form-control" id="LogNo" name="LogNo" required>
+        </div>
+        <div class="mb-3">
+            <label for="ItemDesc" class="form-label">Item Description</label>
+            <input type="text" class="form-control" id="ItemDesc" name="ItemDesc" required>
+        </div>
+        <div class="mb-3">
+            <label for="TurnedInBy" class="form-label">Turned In By</label>
+            <input type="text" class="form-control" id="TurnedInBy" name="TurnedInBy" required>
+        </div>
+        <button type="submit" class="btn btn-secondary">Add</button>
+        <button type="button" class="btn btn-secondary"><a href="../">Cancel</a></button>
+    </form>
+</div>
