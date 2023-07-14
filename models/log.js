@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const LogSchema = mongoose.Schema({
-    LogNo : Integer,
+    LogNo : Number,
     CreatedDate : {
         type: Date,
         default: Date.now
