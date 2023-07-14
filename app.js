@@ -18,7 +18,7 @@ const db = mongoose.connection
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('Connected to Database'))
 
-// define port
+// define port for development
 const PORT = process.env.PORT || 3001;
 // define app
 var app = express();
