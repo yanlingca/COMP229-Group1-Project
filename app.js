@@ -1,15 +1,26 @@
+require('dotenv').config() //implement .env file
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
 
+// connect MongoDB
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
+
+// inizallize router
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-//define port
+// open mongoDB connection
+const db = mongoose.connection
+db.on('error', (error) => console.error(error))
+db.once('open', () => console.log('Connected to Database'))
+
+// define port
 const PORT = process.env.PORT || 3001;
-//define app
+// define app
 var app = express();
 
 // view engine setup
