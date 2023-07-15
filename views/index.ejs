@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Lost & Found Log - <%= title %></title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel='stylesheet' href='stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
@@ -14,8 +14,18 @@
 <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <%- include('partials/nav'); %>
-    <%- include('contents/home'); %>
-    
+    <%- include('partials/nav') %>
+    <% switch(title){
+      case 'Home':%>
+      <%- include('contents/home')%>
+      <% break;
+      case 'Add New Log':%>
+      <%- include('contents/add_form'); %>
+      <% break;
+      case 'UPDATE LOG':%>
+      <%- include('contents/update'); %>
+      <% break;
+    }
+    %>
   </body>
 </html>
