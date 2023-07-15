@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
 
 /*GET Add new log page*/
 router.get("/add", function (req, res, next) {
-  res.render("add", { title: "Add New Log" });
+  res.render("index", { title: "Add New Log" });
 });
 
 /*POST Add new log page*/
@@ -42,7 +42,7 @@ router.get("/update/:id", async (req, res) => {
     const log = await Log.findById(logID);
 
     if (log) {
-      res.render("contents/update", { title: "UPDATE LOG", log });
+      res.render("index", { title: "UPDATE LOG", log });
     } else {
       // If the log is not found, redirect back to the home page
       res.redirect("/");
