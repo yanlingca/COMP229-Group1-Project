@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Head Section -->
+  <title>Lost & Found Log - <%= title %></title>
+    <!-- Content Section -->
+
+    <div class="container">
+      <h1>LOG UPDATE</h1>
+      <form action="/update/<%= log._id %>" method="POST">
+        <div class="form-container">
+          <div class="form">
+            <label for="CreatedDate">Date</label>
+            <input
+              type="date"
+              id="CreatedDate"
+              name="CreatedDate"
+              value="<%= log.CreatedDate.toISOString().split('T')[0] %>"
+            />
+          </div>
+          <div class="form">
+            <label for="LogNo">Log Number</label>
+            <input
+              type="text"
+              id="LogNo"
+              name="LogNo"
+              value="<%= log.LogNo %>"
+            />
+          </div>
+          <div class="form">
+            <label for="ItemDesc">Item Description:</label>
+            <input
+              type="text"
+              id="ItemDesc"
+              name="ItemDesc"
+              value="<%= log.ItemDesc %>"
+            />
+          </div>
+          <div class="form">
+            <label for="TurnedInBy">Turned in By</label>
+            <input
+              type="text"
+              id="TurnedInBy"
+              name="TurnedInBy"
+              value="<%= log.TurnedInBy %>"
+            />
+          </div>
+          <div class="form">
+            <label for="ClaimedBy">Claimed By</label>
+            <input
+              type="text"
+              id="ClaimedBy"
+              name="ClaimedBy"
+              value="<%= log.ClaimedBy %>"
+            />
+          </div>
+          <div class="form">
+            <label for="Phone">Phone</label>
+            <input
+              type="tel"
+              id="Phone"
+              name="Phone"
+              value="<%= log.Phone %>"
+            />
+          </div>
+          <div class="form">
+            <label for="ReleasedBy">Released By</label>
+            <input
+              type="tel"
+              id="ReleasedBy"
+              name="ReleasedBy"
+              value="<%= log.ReleasedBy %>"
+            />
+          </div>
+          <div class="form">
+            <label for="ReleasedDate">Released Date</label>
+            <input
+              type="date"
+              id="ReleasedDate"
+              name="ReleasedDate"
+              value="<%= log.ReleasedDate ? log.ReleasedDate.toISOString().split('T')[0] : '' %>"
+            />
+          </div>
+        </div>
+        <div class="button-group">
+          <button id="updateButton" type="submit">UPDATE</button>
+          <button id="cancelButton" type="button" onclick="cancelUpdate()">
+            CANCEL
+          </button>
+          <button
+            id="removeButton2"
+            type="button"
+            onclick="deleteLog('<%= log._id %>')"
+          >
+            REMOVE
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- Footer Section -->
+
+    <!--Javascript for cancel and update the contact-->
+    <script>
+      function cancelUpdate() {
+        //Redirect the user back to the contact list page
+        window.location.href = "/home";
+      }
+
+      function deleteLog(logId) {
+        console.log("Delete button clicked");
+        if (confirm("Confirm to delete the log?")) {
+          fetch(`/update/delete/${logId}`, {
+            method: "POST",
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              alert(data.message);
+              // Redirect the user back to the contact list page
+              window.location.href = "/";
+            })
+            .catch((error) => {
+              console.error(error);
+              // Handle any errors and display an error message
+              alert("An error occurred while deleting the log.");
+            });
+        }
+      }
+    </script>
+  </body>
+</html>
