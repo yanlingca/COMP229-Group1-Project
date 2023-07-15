@@ -57,7 +57,16 @@ router.get("/update/:id", async (req, res) => {
 router.post("/update/:id", async (req, res) => {
   try {
     const logID = req.params.id;
-    const { LogNo, CreatedDate, ItemDesc, TurnedInBy } = req.body;
+    const {
+      LogNo,
+      CreatedDate,
+      ItemDesc,
+      TurnedInBy,
+      ClaimedBy,
+      Phone,
+      ReleasedBy,
+      DateReleased,
+    } = req.body;
 
     // Validate if the log ID is valid
     if (!mongoose.Types.ObjectId.isValid(logID)) {
@@ -76,6 +85,10 @@ router.post("/update/:id", async (req, res) => {
     log.CreatedDate = CreatedDate;
     log.ItemDesc = ItemDesc;
     log.TurnedInBy = TurnedInBy;
+    log.ClaimedBy = ClaimedBy;
+    log.Phone = Phone;
+    log.ReleasedBy = ReleasedBy;
+    log.DateReleased = DateReleased;
 
     // Save the updated log
     const updatedLog = await log.save();
@@ -83,6 +96,28 @@ router.post("/update/:id", async (req, res) => {
     res.redirect("/");
   } catch (error) {
     console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+/* POST Edit log page - Delete a log. */
+router.post("/delete/:id", async (req, res) => {
+  try {
+    const logID = req.params.id;
+    // Validate if the log ID is valid
+    if (!mongoose.Types.ObjectId.isValid(logID)) {
+      throw new Error("Invalid log ID");
+    }
+
+    // Find the log in the database by ID and delete it
+    const deletedLog = await Log.findByIdAndDelete(logID);
+
+    //error handling
+    if (!deletedLog) {
+      throw new Error("Log not found");
+    }
+    res.json({ message: "Log deleted successfully" });
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });

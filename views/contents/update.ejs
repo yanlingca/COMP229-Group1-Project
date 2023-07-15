@@ -65,19 +65,19 @@
           <div class="form">
             <label for="ReleasedBy">Released By</label>
             <input
-              type="tel"
+              type="text"
               id="ReleasedBy"
               name="ReleasedBy"
               value="<%= log.ReleasedBy %>"
             />
           </div>
           <div class="form">
-            <label for="ReleasedDate">Released Date</label>
+            <label for="DateReleased">Released Date</label>
             <input
               type="date"
-              id="ReleasedDate"
-              name="ReleasedDate"
-              value="<%= log.ReleasedDate ? log.ReleasedDate.toISOString().split('T')[0] : '' %>"
+              id="DateReleased"
+              name="DateReleased"
+              value="<%= log.DateReleased ? log.DateReleased.toISOString().split('T')[0] : '' %>"
             />
           </div>
         </div>
@@ -95,35 +95,26 @@
           </button>
         </div>
       </form>
-    </div>
+
+<!-- Add a hidden form for delete action -->
+<form id="deleteForm" action="/delete/<%= log._id %>" method="POST"></form>
+
     <!-- Footer Section -->
 
     <!--Javascript for cancel and update the contact-->
     <script>
       function cancelUpdate() {
         //Redirect the user back to the contact list page
-        window.location.href = "/home";
+        window.location.href = "/";
       }
 
-      function deleteLog(logId) {
+      function deleteLog(logID) {
         console.log("Delete button clicked");
         if (confirm("Confirm to delete the log?")) {
-          fetch(`/update/delete/${logId}`, {
-            method: "POST",
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              alert(data.message);
-              // Redirect the user back to the contact list page
-              window.location.href = "/";
-            })
-            .catch((error) => {
-              console.error(error);
-              // Handle any errors and display an error message
-              alert("An error occurred while deleting the log.");
-            });
-        }
-      }
+          const deleteForm = document.getElementById("deleteForm");
+    deleteForm.submit();
+          }
+        }           
     </script>
   </body>
 </html>
