@@ -4,6 +4,7 @@ var router = express.Router();
 var User = require('../models/user');
 const mongoose = require("mongoose");
 const bcrypt= require('bcrypt');
+const {login, checkLoggedIn} =require("../middleware/auth");
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -32,9 +33,19 @@ router.post("/registration", async (req, res, next) =>{
       console.log(err.message);
     }
 });
+
 /*GET login page*/
-router.get("/login", function (req, res, next) {
-  res.render("index", { title: "Login", login_message: ""});
+router.get("/login", checkLoggedIn, function (req, res, next) {
+  res.render("index", { title: "Login", login_message: "", loggedIn: req.loggedIn });
 });
+
+//Handling user login
+router.route("/login").post(login);
+
+//Handling user logout 
+router.get("/logout", (req, res) => {
+  res.cookie("jwt", "", { maxAge: "1" })
+  res.redirect("/")
+})
 
 module.exports = router;
