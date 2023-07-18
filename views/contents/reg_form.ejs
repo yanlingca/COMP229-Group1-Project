@@ -1,0 +1,26 @@
+<div class="container">
+    <h1>Registration</h1>
+    <form action="/users/registration" method="POST">
+        <div class="mb-3">
+            <label for="first_name" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" required>
+        </div>
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-secondary">Create User</button>
+        <button type="button" class="btn btn-secondary"><a href="../">Cancel</a></button>
+    </form>
+    <p class="text-center" class="font-weight-bold">
+        <%= reg_message %>
+    </p>
+</div>
