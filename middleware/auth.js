@@ -15,13 +15,13 @@ exports.login = async (req, res, next) => {
     const { email, password } = req.body
     // Check if email and password is provided
     if (!email || !password) {
-        res.render("index", { title: "Login", login_message: "Please input email and Password"});
+        res.render("index", { title: "Login", login_message: "Please input email and Password", loggedIn: false});
     }
     try { //find the user by email
       const user = await User.findOne({ email })
       if (!user) {
         console.log("user not found");
-        res.render("index", { title: "Login", login_message: "User not found"});
+        res.render("index", { title: "Login", login_message: "User not found", loggedIn: false});
       } else {
         // comparing given password with hashed password
         bcrypt.compare(password, user.password).then(function (result) {
@@ -38,13 +38,9 @@ exports.login = async (req, res, next) => {
                 httpOnly: true,
                 maxAge: maxAge * 1000,
               });
-              res.render("index", { title: "Login", login_message: "Incorrect Password."});
-              /*res.status(201).json({
-                message: "User successfully Logged in.",
-                user: user._id,
-              });*/
+              res.redirect("/")
             } else {
-                res.render("index", { title: "Login", login_message: "Incorrect Password."});
+                res.render("index", { title: "Login", login_message: "Incorrect Password.", loggedIn: false});
             }
           });
       }

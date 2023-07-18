@@ -2,20 +2,22 @@ var express = require("express");
 var router = express.Router();
 var Log = require("../models/log");
 const mongoose = require("mongoose");
+const {checkLoggedIn} = require("../middleware/auth");
 
 /* GET home page. */
-router.get("/", async (req, res, next) => {
+router.get("/", checkLoggedIn, async (req, res, next) => {
+  console.log("root")
   try {
     let logs = await Log.find().sort("CreatedDate");
-    res.render("index", { title: "Home", logs: logs });
+    res.render("index", { title: "Home", logs: logs, loggedIn: req.loggedIn });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
 /*GET Add new log page*/
-router.get("/add", function (req, res, next) {
-  res.render("index", { title: "Add New Log" });
+router.get("/add", checkLoggedIn, function (req, res, next) {
+  res.render("index", { title: "Add New Log", loggedIn: req.loggedIn });
 });
 
 /*POST Add new log page*/
@@ -35,14 +37,14 @@ router.post("/add", async (req, res, next) => {
 });
 
 /* GET Edit log page. */
-router.get("/update/:id", async (req, res) => {
+router.get("/update/:id",checkLoggedIn, async (req, res) => {
   try {
     const logID = req.params.id;
     //Retrieve the log from the database based on the ID
     const log = await Log.findById(logID);
 
     if (log) {
-      res.render("index", { title: "UPDATE LOG", log });
+      res.render("index", { title: "UPDATE LOG", log, loggedIn: req.loggedIn });
     } else {
       // If the log is not found, redirect back to the home page
       res.redirect("/");
@@ -54,7 +56,7 @@ router.get("/update/:id", async (req, res) => {
 });
 
 /* POST Edit log page - Update a log. */
-router.post("/update/:id", async (req, res) => {
+router.post("/update/:id",checkLoggedIn, async (req, res) => {
   try {
     const logID = req.params.id;
     const {

@@ -6,14 +6,10 @@ const mongoose = require("mongoose");
 const bcrypt= require('bcrypt');
 const {login, checkLoggedIn} =require("../middleware/auth");
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
 /*GET registration page*/
 router.get("/registration", function (req, res, next) {
-  res.render("index", { title: "Registration", reg_message: ""});
+  res.cookie("jwt", "", { maxAge: "1" })
+  res.render("index", { title: "Registration", reg_message: "", loggedIn: false});
 });
 
 /*POST create new user*/
@@ -36,7 +32,8 @@ router.post("/registration", async (req, res, next) =>{
 
 /*GET login page*/
 router.get("/login", checkLoggedIn, function (req, res, next) {
-  res.render("index", { title: "Login", login_message: "", loggedIn: req.loggedIn });
+  res.cookie("jwt", "", { maxAge: "1" })
+  res.render("index", { title: "Login", login_message: "", loggedIn: false });
 });
 
 //Handling user login
