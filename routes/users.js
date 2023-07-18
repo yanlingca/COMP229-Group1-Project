@@ -32,5 +32,9 @@ router.post("/registration", async (req, res, next) =>{
       console.log(err.message);
     }
 });
+/*GET login page*/
+router.get("/login", function (req, res, next) {
+  res.render("index", { title: "Login", login_message: ""});
+});
 
 module.exports = router;
