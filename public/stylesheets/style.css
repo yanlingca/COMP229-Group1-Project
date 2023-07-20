@@ -11,3 +11,34 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+/* to remove the bullet points on nav bar */
+.navbar-nav li {
+  list-style: none;
+}
+
+/* Style for the login/logout button */
+.btn-login {
+  background-color: #1a67b4c7;
+  color: #fff;
+  margin-right: 10px;
+}
+
+/* Style for the register button */
+.btn-register {
+  background-color: #1a67b4c7;
+  color: #fff;
+  margin-right: 10px;
+}
+
+/* format the button style */
+#login-button,
+#register-button {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.navbar-nav {
+  display: flex;
+  padding-left: 80vw;
+}
