@@ -37,17 +37,23 @@ router.post("/add", async (req, res, next) => {
 });
 
 /* GET Edit log page. */
-router.get("/update/:id",checkLoggedIn, async (req, res) => {
+router.get("/update/:id", checkLoggedIn, async (req, res) => {
   try {
-    const logID = req.params.id;
-    //Retrieve the log from the database based on the ID
-    const log = await Log.findById(logID);
+    //if not login, redirect to login page
+    if (!req.loggedIn){
+      res.redirect("/users/login");
+    }
+    else{
+      const logID = req.params.id;
+      //Retrieve the log from the database based on the ID
+      const log = await Log.findById(logID);
 
-    if (log) {
-      res.render("index", { title: "UPDATE LOG", log, loggedIn: req.loggedIn });
-    } else {
-      // If the log is not found, redirect back to the home page
-      res.redirect("/");
+      if (log) {
+        res.render("index", { title: "UPDATE LOG", log, loggedIn: req.loggedIn });
+      } else {
+        // If the log is not found, redirect back to the home page
+        res.redirect("/");
+      }
     }
   } catch (error) {
     //Handle any errors and redirect to an error page or show an error message
@@ -58,44 +64,49 @@ router.get("/update/:id",checkLoggedIn, async (req, res) => {
 /* POST Edit log page - Update a log. */
 router.post("/update/:id",checkLoggedIn, async (req, res) => {
   try {
-    const logID = req.params.id;
-    const {
-      LogNo,
-      CreatedDate,
-      ItemDesc,
-      TurnedInBy,
-      ClaimedBy,
-      Phone,
-      ReleasedBy,
-      DateReleased,
-    } = req.body;
+    //if not login, response 401 error
+    if (!req.loggedIn){
+      res.status(401).json({ message: "Login is required" });
+    }else{
+      const logID = req.params.id;
+      const {
+        LogNo,
+        CreatedDate,
+        ItemDesc,
+        TurnedInBy,
+        ClaimedBy,
+        Phone,
+        ReleasedBy,
+        DateReleased,
+      } = req.body;
 
-    // Validate if the log ID is valid
-    if (!mongoose.Types.ObjectId.isValid(logID)) {
-      throw new Error("Invalid log ID");
+      // Validate if the log ID is valid
+      if (!mongoose.Types.ObjectId.isValid(logID)) {
+        throw new Error("Invalid log ID");
+      }
+
+      // Retrieve the log from the database based on the ID
+      const log = await Log.findById(logID);
+
+      if (!log) {
+        throw new Error("Log not found");
+      }
+
+      // Update the log properties
+      log.LogNo = LogNo;
+      log.CreatedDate = CreatedDate;
+      log.ItemDesc = ItemDesc;
+      log.TurnedInBy = TurnedInBy;
+      log.ClaimedBy = ClaimedBy;
+      log.Phone = Phone;
+      log.ReleasedBy = ReleasedBy;
+      log.DateReleased = DateReleased;
+
+      // Save the updated log
+      const updatedLog = await log.save();
+
+      res.redirect("/");
     }
-
-    // Retrieve the log from the database based on the ID
-    const log = await Log.findById(logID);
-
-    if (!log) {
-      throw new Error("Log not found");
-    }
-
-    // Update the log properties
-    log.LogNo = LogNo;
-    log.CreatedDate = CreatedDate;
-    log.ItemDesc = ItemDesc;
-    log.TurnedInBy = TurnedInBy;
-    log.ClaimedBy = ClaimedBy;
-    log.Phone = Phone;
-    log.ReleasedBy = ReleasedBy;
-    log.DateReleased = DateReleased;
-
-    // Save the updated log
-    const updatedLog = await log.save();
-
-    res.redirect("/");
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });
@@ -103,22 +114,27 @@ router.post("/update/:id",checkLoggedIn, async (req, res) => {
 });
 
 /* POST Edit log page - Delete a log. */
-router.post("/delete/:id", async (req, res) => {
+router.post("/delete/:id", checkLoggedIn, async (req, res) => {
   try {
-    const logID = req.params.id;
-    // Validate if the log ID is valid
-    if (!mongoose.Types.ObjectId.isValid(logID)) {
-      throw new Error("Invalid log ID");
-    }
+    //if not login, response 401 error
+    if (!req.loggedIn){
+      res.status(401).json({ message: "Login is required" });
+    }else{
+      const logID = req.params.id;
+      // Validate if the log ID is valid
+      if (!mongoose.Types.ObjectId.isValid(logID)) {
+        throw new Error("Invalid log ID");
+      }
 
-    // Find the log in the database by ID and delete it
-    const deletedLog = await Log.findByIdAndDelete(logID);
+      // Find the log in the database by ID and delete it
+      const deletedLog = await Log.findByIdAndDelete(logID);
 
-    //error handling
-    if (!deletedLog) {
-      throw new Error("Log not found");
+      //error handling
+      if (!deletedLog) {
+        throw new Error("Log not found");
+      }
+      res.json({ message: "Log deleted successfully" });
     }
-    res.json({ message: "Log deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
