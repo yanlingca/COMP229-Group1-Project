@@ -140,5 +140,4 @@ router.post("/delete/:id", checkLoggedIn, async (req, res) => {
   }
 });
 
-
 module.exports = router;
