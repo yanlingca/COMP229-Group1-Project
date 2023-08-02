@@ -4,7 +4,7 @@ var router = express.Router();
 var User = require("../models/user");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const { login, checkLoggedIn } = require("../middleware/auth");
+const { login, checkLoggedIn, registration } = require("../middleware/auth");
 
 /*GET registration page*/
 router.get("/registration", function (req, res, next) {
@@ -16,26 +16,8 @@ router.get("/registration", function (req, res, next) {
   });
 });
 
-/*POST create new user*/
-router.post("/registration", async (req, res, next) => {
-  const hashedPassword = await bcrypt.hash(req.body.password, 10);
-  const user = new User({
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
-    email: req.body.email,
-    password: hashedPassword,
-  });
-  try {
-    const newUser = await user.save();
-    res.redirect("../");
-  } catch (err) {
-    res.render("index", {
-      title: "Registration",
-      reg_message: "Failed to register. Please try again!",
-    });
-    console.log(err.message);
-  }
-});
+//Handling user registration
+router.route("/registration").post(registration);
 
 /*GET login page*/
 router.get("/login", checkLoggedIn, function (req, res, next) {
