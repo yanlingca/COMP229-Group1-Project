@@ -33,7 +33,7 @@ exports.registration = async (req, res, next) => {
       });
       try {
         const newUser = await user.save();
-        res.redirect("../");
+        res.redirect("/users/login")
       } catch (err) {
         res.status(400).json({
           message: "An error occurred",
