@@ -1,100 +1,88 @@
 <div class="container">
-  <h1>LOG UPDATE</h1>
-  <form action="/update/<%= log._id %>" method="POST">
-    <div class="mb-3">
-      <label for="CreatedDate" class="form-label">Date</label>
-      <input
-        type="date"
-        class="form-control"
-        id="CreatedDate"
-        name="CreatedDate"
-        value="<%= log.CreatedDate.toISOString().split('T')[0] %>"
-      />
+  <h1 class="text-center text-muted">LOG UPDATE</h1>
+  <form class="well form-horizontal" action="/update/<%= log._id %>" method="POST">
+    <fieldset>
+      <div class="form-group">
+        <label class="col-md-4 control-label" class="form-label" for="CreatedDate">Date</label>  
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <input type="date" class="form-control" id="CreatedDate" name="CreatedDate" placeholder="DD/MM/YYYY" value="<%= log.CreatedDate.toISOString().split('T')[0] %>" required>
+            </div>
+        </div>
     </div>
-    <div class="mb-3">
-      <label for="LogNo" class="form-label">Log Number</label>
-      <input
-        type="text"
-        class="form-control"
-        id="LogNo"
-        name="LogNo"
-        value="<%= log.LogNo %>"
-      />
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="LogNo">Log Number</label>  
+      <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+              <span class="input-group-addon"><i class="	glyphicon glyphicon-asterisk"></i></span>
+              <input id="LogNo" name="LogNo" placeholder="Log Number" class="form-control"  type="text" value="<%= log.LogNo %>" required>
+          </div>
+      </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="ItemDesc">Item Description</label>
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+              <textarea class="form-control" id="ItemDesc" name="ItemDesc" placeholder="Item Description" required><%= log.ItemDesc %></textarea>
+     </div>
+     </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-4 control-label" class="form-label" for="TurnedInBy">Turned In By</label>  
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input type="text" class="form-control" id="TurnedInBy" name="TurnedInBy" placeholder="Turned In By" value="<%= log.TurnedInBy %>" required>
+        </div>
     </div>
-    <div class="mb-3">
-      <label for="ItemDesc" class="form-label">Item Description:</label>
-      <input
-        type="text"
-        class="form-control"
-        id="ItemDesc"
-        name="ItemDesc"
-        value="<%= log.ItemDesc %>"
-      />
+  </div>
+  <div class="form-group">
+    <label class="col-md-4 control-label" class="form-label" for="ClaimedBy">Claimed By</label>  
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input type="text" class="form-control" id="ClaimedBy" name="ClaimedBy" placeholder="Claimed By" value="<%= log.ClaimedBy %>" required>
+        </div>
     </div>
-    <div class="mb-3">
-      <label for="TurnedInBy" class="form-label">Turned in By</label>
-      <input
-        type="text"
-        class="form-control"
-        id="TurnedInBy"
-        name="TurnedInBy"
-        value="<%= log.TurnedInBy %>"
-      />
+  </div>
+  <div class="form-group">
+    <label class="col-md-4 control-label" class="form-label" for="Phone">Phone Number</label>  
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+            <input type="text" class="form-control" id="Phone" name="Phone" placeholder="Phone Number" value="<%= log.Phone %>" required>
+        </div>
     </div>
-    <div class="mb-3">
-      <label for="ClaimedBy" class="form-label">Claimed By</label>
-      <input
-        type="text"
-        class="form-control"
-        id="ClaimedBy"
-        name="ClaimedBy"
-        value="<%= log.ClaimedBy %>"
-      />
+  </div>
+  <div class="form-group">
+    <label class="col-md-4 control-label" class="form-label" for="ReleasedBy">Released By</label>  
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input type="text" class="form-control" id="ReleasedBy" name="ReleasedBy" placeholder="Released By" value="<%= log.ReleasedBy %>" required>
+        </div>
     </div>
-    <div class="mb-3">
-      <label for="Phone" class="form-label">Phone</label>
-      <input
-        type="tel"
-        class="form-control"
-        id="Phone"
-        name="Phone"
-        value="<%= log.Phone %>"
-      />
+  </div>
+  <div class="form-group">
+    <label class="col-md-4 control-label" class="form-label" for="DateReleased">Released Date</label>  
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            <input type="date" class="form-control" id="DateReleased" name="DateReleased" placeholder="DD/MM/YYYY" value="<%= log.DateReleased ? log.DateReleased.toISOString().split('T')[0] : '' %>" required>
+        </div>
     </div>
-    <div class="mb-3">
-      <label for="ReleasedBy" class="form-label">Released By</label>
-      <input
-        type="text"
-        class="form-control"
-        id="ReleasedBy"
-        name="ReleasedBy"
-        value="<%= log.ReleasedBy %>"
-      />
+  </div>
+  <div class="form-group">
+    <label class="col-md-4 control-label"></label>
+    <div class="col-md-4">
+      <button type="submit" id="updateButton" class="btn btn-warning" >Update <span class="glyphicon glyphicon-send"></span></button>
+      <button type="button" id="removeButton" class="btn btn-danger" onclick="deleteLog('<%= log._id %>')">Remove <span class="glyphicon glyphicon-remove"></span></button>
+      <button type="button" id="cancelButton" class="btn btn-default" onclick="cancelUpdate()">Cancel <span class="glyphicon glyphicon-remove"></span></button>  
     </div>
-    <div class="mb-3">
-      <label for="DateReleased" class="form-label">Released Date</label>
-      <input
-        type="date"
-        class="form-control"
-        id="DateReleased"
-        name="DateReleased"
-        value="<%= log.DateReleased ? log.DateReleased.toISOString().split('T')[0] : '' %>"
-      />
-    </div>
-    <div class="button-group">
-      <button id="updateButton" type="submit" class="btn btn-secondary">UPDATE</button>
-      <button id="cancelButton" type="button" class="btn btn-secondary" onclick="cancelUpdate()">
-        CANCEL
-      </button>
-      <button
-        id="removeButton2"
-        type="button"
-        class="btn btn-secondary"
-        onclick="deleteLog('<%= log._id %>')"
-      >
-        REMOVE
-      </button>
-    </div>
+  </div>
+  </fieldset>
   </form>
 
 <!-- Add a hidden form for delete action -->

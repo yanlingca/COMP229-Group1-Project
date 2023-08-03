@@ -6,7 +6,6 @@ const {checkLoggedIn} = require("../middleware/auth");
 
 /* GET home page. */
 router.get("/", checkLoggedIn, async (req, res, next) => {
-  console.log("root")
   try {
     let logs = await Log.find().sort("CreatedDate");
     res.render("index", { title: "Home", logs: logs, loggedIn: req.loggedIn });
@@ -47,7 +46,6 @@ router.get("/update/:id", checkLoggedIn, async (req, res) => {
       const logID = req.params.id;
       //Retrieve the log from the database based on the ID
       const log = await Log.findById(logID);
-
       if (log) {
         res.render("index", { title: "UPDATE LOG", log, loggedIn: req.loggedIn });
       } else {
@@ -104,7 +102,6 @@ router.post("/update/:id",checkLoggedIn, async (req, res) => {
 
       // Save the updated log
       const updatedLog = await log.save();
-
       res.redirect("/");
     }
   } catch (error) {

@@ -46,6 +46,14 @@
   padding-left: 80vw;
 }
 
+Beautifly-Log-Forms
+.form-group a{
+  color: #6b6b6b;
+}
+.form-group a:hover{
+ text-decoration: none;
+}
+
 /*style for login form*/
 .form_container {
   max-width: 50%;
