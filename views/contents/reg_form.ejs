@@ -1,45 +1,57 @@
 <div class="container">
-    <h1>Registration</h1>
-
-    <form action="/users/registration" method="POST" onsubmit="return validatePassword()">
-        <div class="mb-3">
-            <label for="first_name" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="first_name" name="first_name" required>
-        </div>
-        <div class="mb-3">
-            <label for="last_name" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="last_name" name="last_name" required>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required>
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-        </div>
-        <div class="mb-3">
-            <label for="confirm_password" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
-        </div>
-        <button type="submit" class="btn btn-secondary">Create User</button>
-        <button type="button" class="btn btn-secondary"><a href="../">Cancel</a></button>
-    </form>
-    <p class="text-center" class="font-weight-bold">
-        <%= reg_message %>
-    </p>
+    <div class="form_container">
+        <form action="/users/registration" method="POST" onsubmit="return validatePassword()" autocomplete="off">
+            <h1 class="text-center text-muted">Registration</h1>
+            <hr>
+            <div class="row form-group">
+                <div class="col-xs-6 col-md-6">
+                    <input type="text" class="form-control" id="first_name" name="first_name" required autofocus
+                        placeholder="First Name">
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <input type="text" class="form-control" id="last_name" name="last_name" required autofocus
+                        placeholder="Last Name">
+                </div>
+            </div>
+            <div class="input-group form-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email address" required>
+            </div>
+            <div class="input-group form-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                    required>
+            </div>
+            <div class="input-group form-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+                    placeholder="Confirm Password" required>
+            </div>
+            <div class="row">
+                <p class="text-center text-danger promptMessage">
+                    <%= reg_message %>
+                </p>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 form-group">
+                <input type="submit" class="btn btn-1g btn-success btn-block" value="Register">
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 form-group">
+                <a href="../" class="btn btn-1g btn-primary btn-block">Cancel</a>
+            </div>
+        </form>
+    </div>
 </div>
 
 <script>
-    // Check the consistency of password and confirm password
-    function validatePassword() {
+    //Check the consistency of password and confirm password
+    function validatePassword(){
         var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("confirm_password").value;
-    
-        if (password !== confirmPassword) {
-            Swal.fire("Password and confirm password must match to continue.");
+
+        if (password !== confirmPassword){
+            Swal.fire("Please make sure your passwords match");
             return false;
         }
-        return true
+        return true;
     }
 </script>

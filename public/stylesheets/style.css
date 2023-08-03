@@ -46,12 +46,22 @@
   padding-left: 80vw;
 }
 
+Beautifly-Log-Forms
 .form-group a{
   color: #6b6b6b;
 }
 .form-group a:hover{
  text-decoration: none;
 }
-.contaner{
-  width:400px;
+
+/*style for login form*/
+.form_container {
+  max-width: 50%;
+  padding: 20px 20px 50px;
+  margin:0 auto 25px;
+  background-color: #fff;
+  box-shadow: 0 10px 10px -2px #000000;
+}
+.promptMessage{
+  min-height: 30px;
 }
