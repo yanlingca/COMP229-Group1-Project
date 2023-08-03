@@ -21,7 +21,7 @@
                 <tbody>
                     <% for(let i=0;i<logs.length;i++) {%>
                         <tr>
-                            <td><%= logs[i].CreatedDate.getFullYear()%>-<%= logs[i].CreatedDate.getMonth()+1%>-<%= logs[i].CreatedDate.getDate()%></td>
+                            <td><%= logs[i].CreatedDate.toISOString().split('T')[0]%></td>
                             <td><%= logs[i].LogNo%></td>
                             <td><%= logs[i].ItemDesc%></td>
                             <td><%= logs[i].TurnedInBy%></td>
@@ -31,7 +31,7 @@
                             <% if(logs[i].DateReleased==null){ %>
                                 <td></td>
                               <% } else{ %>  
-                                <td><%= logs[i].DateReleased.getFullYear()%>-<%= logs[i].DateReleased.getMonth()+1%>-<%= logs[i].DateReleased.getDate()%></td>
+                                <td><%= logs[i].DateReleased.toISOString().split('T')[0]%></td>
                              <% } %>
                             <td><p data-placement="top" data-toggle="tooltip" title="Edit">
                               <% if (loggedIn) { %>
@@ -69,9 +69,9 @@
             })
               .then((response) => response.json())
               .then((data) => {
-                alert(data.message);
+                alert("Log deleted successfully");
                 // Redirect the user back to the contact list page
-                window.location.href = "/";
+                window.location.href = "/?deleted=1";
               })
               .catch((error) => {
                 console.error(error);

@@ -8,7 +8,7 @@ const {checkLoggedIn} = require("../middleware/auth");
 router.get("/", checkLoggedIn, async (req, res, next) => {
   try {
     let logs = await Log.find().sort("CreatedDate");
-    res.render("index", { title: "Home", logs: logs, loggedIn: req.loggedIn });
+    res.render("index", { title: "Home", logs: logs, loggedIn: req.loggedIn, message: req.query.message });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -50,7 +50,7 @@ router.get("/update/:id", checkLoggedIn, async (req, res) => {
         res.render("index", { title: "UPDATE LOG", log, loggedIn: req.loggedIn });
       } else {
         // If the log is not found, redirect back to the home page
-        res.redirect("/");
+        res.redirect('/');
       }
     }
   } catch (error) {
@@ -102,7 +102,7 @@ router.post("/update/:id",checkLoggedIn, async (req, res) => {
 
       // Save the updated log
       const updatedLog = await log.save();
-      res.redirect("/");
+      res.redirect('/');
     }
   } catch (error) {
     console.error(error);
