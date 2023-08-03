@@ -45,3 +45,13 @@
   display: flex;
   padding-left: 80vw;
 }
+
+.form-group a{
+  color: #6b6b6b;
+}
+.form-group a:hover{
+ text-decoration: none;
+}
+.contaner{
+  width:400px;
+}
