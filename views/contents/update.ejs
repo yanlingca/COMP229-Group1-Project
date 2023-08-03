@@ -78,7 +78,6 @@
     <label class="col-md-4 control-label"></label>
     <div class="col-md-4">
       <button type="submit" id="updateButton" class="btn btn-warning" >Update <span class="glyphicon glyphicon-send"></span></button>
-      <button type="button" id="removeButton" class="btn btn-danger" onclick="deleteLog('<%= log._id %>')">Remove <span class="glyphicon glyphicon-remove"></span></button>
       <button type="button" id="cancelButton" class="btn btn-default" onclick="cancelUpdate()">Cancel <span class="glyphicon glyphicon-remove"></span></button>  
     </div>
   </div>
@@ -101,7 +100,7 @@
     console.log("Delete button clicked");
     if (confirm("Confirm to delete the log?")) {
       const deleteForm = document.getElementById("deleteForm");
-deleteForm.submit();
+      deleteForm.submit();
       }
     }           
 </script>

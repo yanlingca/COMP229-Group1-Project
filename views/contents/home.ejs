@@ -69,9 +69,9 @@
             })
               .then((response) => response.json())
               .then((data) => {
-                alert(data.message);
+                alert("Log deleted successfully");
                 // Redirect the user back to the contact list page
-                window.location.href = "/";
+                window.location.href = "/?deleted=1";
               })
               .catch((error) => {
                 console.error(error);
