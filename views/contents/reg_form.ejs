@@ -1,7 +1,7 @@
 <div class="container">
+    <h1 class="text-center text-muted">REGISTRATION</h1>
     <div class="form_container">
         <form action="/users/registration" method="POST" onsubmit="return validatePassword()" autocomplete="off">
-            <h1 class="text-center text-muted">Registration</h1>
             <hr>
             <div class="row form-group">
                 <div class="col-xs-6 col-md-6">
@@ -33,10 +33,10 @@
                 </p>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 form-group">
-                <input type="submit" class="btn btn-1g btn-success btn-block" value="Register">
+                <button type="submit" class="btn btn-1g btn-block btn-warning" >Register <span class="glyphicon glyphicon-send"></span></button>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 form-group">
-                <a href="../" class="btn btn-1g btn-primary btn-block">Cancel</a>
+                <button type="button" id="cancel" class="btn btn-1g btn-block btn-default"><a href="../">Cancel <span class="glyphicon glyphicon-remove"></span></a></button>
             </div>
         </form>
     </div>
