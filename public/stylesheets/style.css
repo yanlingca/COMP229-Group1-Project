@@ -17,6 +17,28 @@
   list-style: none;
 }
 
+/* Navigation Bar */
+.lowernavbar {
+  background-color: #7658e4;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.lowernavbar a {
+  color: #f2f2f2;
+  text-align: center;
+  padding: 12px 35px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.lowernavbar a:hover {
+  background-color: #ddd;
+  overflow: hidden;
+  color: black;
+}
+
 /* Style for the login/logout button */
 .btn-login {
   background-color: #1a67b4c7;
