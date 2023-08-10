@@ -71,6 +71,48 @@
   border-color: #eea236;
   background-color: #f0ad4e;
   color: #fff;
+  margin-left: 48px;
+  font-weight: bold;
+}
+
+/* Center the table within a container */
+.table-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Style the table headers (th elements) */
+th {
+  text-align: center; /* Center-align the content */
+  font-weight: bold; /* Bold font */
+}
+
+/* Align first to eigth columns with appropriate width */
+#mytable tbody td:nth-child(1),
+#mytable tbody td:nth-child(2),
+#mytable tbody td:nth-child(5),
+#mytable tbody td:nth-child(6) {
+  width: 100px;
+}
+
+#mytable tbody td:nth-child(3) {
+  width: 140px;
+}
+
+#mytable tbody td:nth-child(4),
+#mytable tbody td:nth-child(7) {
+  width: 120px;
+}
+
+#mytable tbody td:nth-child(8) {
+  width: 150px;
+}
+
+/* Align "Edit" and "Delete" columns to the center and make them the same width */
+#mytable tbody td:nth-child(9),
+#mytable tbody td:nth-child(10) {
+  text-align: center;
+  width: 50px;
 }
 
 .navbar-nav {
