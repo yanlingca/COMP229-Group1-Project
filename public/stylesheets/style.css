@@ -55,12 +55,62 @@
 
 /* format the button style */
 #login-button,
-#register-button,
-#add-button {
+#register-button {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 15px;
   padding-right: 15px;
+}
+
+#add-button {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+  border-color: #eea236;
+  background-color: #f0ad4e;
+  color: #fff;
+  margin-left: 48px;
+  font-weight: bold;
+  font-size: small;
+}
+
+/* Center the table within a container */
+.table-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Style the table headers (th elements) */
+th {
+  font-weight: bold; /* Bold font */
+}
+
+/* Align first to eigth columns with appropriate width */
+#mytable tbody td:nth-child(1),
+#mytable tbody td:nth-child(2),
+#mytable tbody td:nth-child(5),
+#mytable tbody td:nth-child(6) {
+  width: 100px;
+}
+
+#mytable tbody td:nth-child(3) {
+  width: 140px;
+}
+
+#mytable tbody td:nth-child(4),
+#mytable tbody td:nth-child(7) {
+  width: 120px;
+}
+
+#mytable tbody td:nth-child(8) {
+  width: 150px;
+}
+
+/* Align "Edit" and "Delete" columns to the center and make them the same width */
+#mytable tbody td:nth-child(9),
+#mytable tbody td:nth-child(10) {
+  text-align: center;
+  width: 50px;
 }
 
 .navbar-nav {
@@ -68,22 +118,21 @@
   padding-left: 80vw;
 }
 
-Beautifly-Log-Forms
-.form-group a{
+Beautifly-Log-Forms .form-group a {
   color: #6b6b6b;
 }
-.form-group a:hover{
- text-decoration: none;
+.form-group a:hover {
+  text-decoration: none;
 }
 
 /*style for login form*/
 .form_container {
   max-width: 50%;
   padding: 20px 20px 50px;
-  margin:0 auto 25px;
+  margin: 0 auto 25px;
   background-color: #fff;
   box-shadow: 0 10px 10px -2px #000000;
 }
-.promptMessage{
+.promptMessage {
   min-height: 30px;
 }
